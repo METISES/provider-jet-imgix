@@ -11,6 +11,8 @@ export TERRAFORM_PROVIDER_VERSION := 0.0.1-pre3
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-imgix
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/teamjourney/terraform-provider-imgix/releases/download/v0.0.1-pre3
 
+export BUILD_REGISTRY := us-central1-docker.pkg.dev/metises-com/crossplane
+
 PLATFORMS ?= linux_amd64 linux_arm64
 
 # -include will silently skip missing files, which allows us
