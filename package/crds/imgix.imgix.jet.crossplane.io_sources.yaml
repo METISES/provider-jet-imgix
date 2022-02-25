@@ -1,0 +1,281 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.8.0
+  creationTimestamp: null
+  name: sources.imgix.imgix.jet.crossplane.io
+spec:
+  group: imgix.imgix.jet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - imgixjet
+    kind: Source
+    listKind: SourceList
+    plural: sources
+    singular: source
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Source is the Schema for the Sources API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: SourceSpec defines the desired state of Source
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource.
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  deployment:
+                    items:
+                      properties:
+                        annotation:
+                          description: Any comment on the specific deployment.
+                          type: string
+                        cacheTtlBehavior:
+                          description: Policy to determine how the TTL on imgix images
+                            is set.
+                          type: string
+                        cacheTtlError:
+                          description: TTL (in seconds) for any error image served
+                            when unable to fetch a file from origin.
+                          type: number
+                        cacheTtlValue:
+                          description: TTL (in seconds) for any error image served
+                            when unable to fetch a file from origin.
+                          type: number
+                        crossdomainXmlEnabled:
+                          description: Whether this Source should serve a Cross-Domain
+                            Policy file if requested.
+                          type: boolean
+                        customDomains:
+                          description: Non-imgix.net domains you want to use to access
+                            your images. Custom domains must be unique across all
+                            Sources and must be valid domains.
+                          items:
+                            type: string
+                          type: array
+                        defaultParams:
+                          additionalProperties:
+                            type: string
+                          description: Parameters that should be set on all requests
+                            to this Source.
+                          type: object
+                        imageError:
+                          description: Image URL imgix should serve instead when a
+                            request results in an error.
+                          type: string
+                        imageErrorAppendQs:
+                          description: Whether imgix should pass the parameters on
+                            the request that received an error to the URL described
+                            in image_error.
+                          type: boolean
+                        imageMissing:
+                          description: Image URL imgix should serve instead when a
+                            request results in a missing image.
+                          type: string
+                        imageMissingAppendQs:
+                          description: Whether imgix should pass the parameters on
+                            the request that resulted in a missing image to the URL
+                            described in image_missing.
+                          type: boolean
+                        imgixSubdomains:
+                          description: Subdomain you want to use on *.imgix.net to
+                            access your images.
+                          items:
+                            type: string
+                          type: array
+                        s3AccessKey:
+                          description: AWS Access Key ID.
+                          type: string
+                        s3Bucket:
+                          description: AWS S3 bucket name.
+                          type: string
+                        s3Prefix:
+                          description: The folder prefix prepended to the image path
+                            before resolving the image in S3.
+                          type: string
+                        s3SecretKeySecretRef:
+                          description: AWS S3 Secret Access Key.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        secureUrlEnabled:
+                          description: Whether requests must be signed with the secure_url_token
+                            to be considered valid.
+                          type: boolean
+                        type:
+                          description: Type of the deployment.
+                          type: string
+                      required:
+                      - imgixSubdomains
+                      - type
+                      type: object
+                    type: array
+                  enabled:
+                    description: Whether or not a Source is enabled and capable of
+                      serving traffic.
+                    type: boolean
+                  waitForDeployed:
+                    description: Determines if Terraform should wait for deployed
+                      status after any change.
+                    type: boolean
+                required:
+                - deployment
+                type: object
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              providerRef:
+                description: 'ProviderReference specifies the provider that will be
+                  used to create, observe, update, and delete this managed resource.
+                  Deprecated: Please use ProviderConfigReference, i.e. `providerConfigRef`'
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: SourceStatus defines the observed state of Source.
+            properties:
+              atProvider:
+                properties:
+                  dateDeployed:
+                    type: number
+                  deploymentStatus:
+                    type: string
+                  id:
+                    type: string
+                  secureUrlToken:
+                    type: string
+                  type:
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []

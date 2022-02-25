@@ -25,8 +25,8 @@ import (
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane-contrib/provider-jet-template"
+	resourcePrefix = "imgix"
+	modulePath     = "github.com/timgchile/provider-jet-imgix"
 )
 
 //go:embed schema.json
