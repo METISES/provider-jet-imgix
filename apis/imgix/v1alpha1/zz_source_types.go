@@ -59,6 +59,22 @@ type DeploymentParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultParams map[string]*string `json:"defaultParams,omitempty" tf:"default_params,omitempty"`
 
+	// GCS Access Key ID.
+	// +kubebuilder:validation:Optional
+	GcsAccessKey *string `json:"gcsAccessKey,omitempty" tf:"gcs_access_key,omitempty"`
+
+	// GCS bucket name.
+	// +kubebuilder:validation:Optional
+	GcsBucket *string `json:"gcsBucket,omitempty" tf:"gcs_bucket,omitempty"`
+
+	// The folder prefix prepended to the image path before resolving the image in GCS.
+	// +kubebuilder:validation:Optional
+	GcsPrefix *string `json:"gcsPrefix,omitempty" tf:"gcs_prefix,omitempty"`
+
+	// GCS Secret Access Key.
+	// +kubebuilder:validation:Optional
+	GcsSecretKeySecretRef *v1.SecretKeySelector `json:"gcsSecretKeySecretRef,omitempty" tf:"-"`
+
 	// Image URL imgix should serve instead when a request results in an error.
 	// +kubebuilder:validation:Optional
 	ImageError *string `json:"imageError,omitempty" tf:"image_error,omitempty"`

@@ -100,6 +100,26 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.GcsAccessKey != nil {
+		in, out := &in.GcsAccessKey, &out.GcsAccessKey
+		*out = new(string)
+		**out = **in
+	}
+	if in.GcsBucket != nil {
+		in, out := &in.GcsBucket, &out.GcsBucket
+		*out = new(string)
+		**out = **in
+	}
+	if in.GcsPrefix != nil {
+		in, out := &in.GcsPrefix, &out.GcsPrefix
+		*out = new(string)
+		**out = **in
+	}
+	if in.GcsSecretKeySecretRef != nil {
+		in, out := &in.GcsSecretKeySecretRef, &out.GcsSecretKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ImageError != nil {
 		in, out := &in.ImageError, &out.ImageError
 		*out = new(string)

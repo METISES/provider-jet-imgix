@@ -98,6 +98,33 @@ spec:
                           description: Parameters that should be set on all requests
                             to this Source.
                           type: object
+                        gcsAccessKey:
+                          description: GCS Access Key ID.
+                          type: string
+                        gcsBucket:
+                          description: GCS bucket name.
+                          type: string
+                        gcsPrefix:
+                          description: The folder prefix prepended to the image path
+                            before resolving the image in GCS.
+                          type: string
+                        gcsSecretKeySecretRef:
+                          description: GCS Secret Access Key.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         imageError:
                           description: Image URL imgix should serve instead when a
                             request results in an error.
