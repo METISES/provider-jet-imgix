@@ -4,4 +4,4 @@ metadata:
   name: provider-jet-imgix
 spec:
   controller:
-    image: DOCKER_REGISTRY/provider-jet-imgix-controller:VERSION
+    image: DOCKER_REGISTRY/provider-jet-imgix-controller-amd64:VERSION
