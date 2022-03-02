@@ -313,10 +313,14 @@ jobs:
       - name: Push images
         shell: bash
         run: |
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64
+          docker tag us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64 us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64:${{ env.VERSION }}
+          docker tag us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64 us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64:${{ env.VERSION }}
+          docker tag us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64 us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64:${{ env.VERSION }}
+          docker tag us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64 us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64:${{ env.VERSION }}
           docker tag us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64 us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller
           docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller
         
