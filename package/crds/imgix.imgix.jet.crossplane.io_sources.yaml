@@ -98,9 +98,23 @@ spec:
                           description: Parameters that should be set on all requests
                             to this Source.
                           type: object
-                        gcsAccessKey:
+                        gcsAccessKeySecretRef:
                           description: GCS Access Key ID.
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         gcsBucket:
                           description: GCS bucket name.
                           type: string
@@ -149,9 +163,23 @@ spec:
                           items:
                             type: string
                           type: array
-                        s3AccessKey:
+                        s3AccessKeySecretRef:
                           description: AWS Access Key ID.
-                          type: string
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         s3Bucket:
                           description: AWS S3 bucket name.
                           type: string

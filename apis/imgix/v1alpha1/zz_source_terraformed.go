@@ -32,7 +32,7 @@ func (mg *Source) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Source
 func (tr *Source) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"deployment[*].gcs_secret_key": "spec.forProvider.deployment[*].gcsSecretKeySecretRef", "deployment[*].s3_secret_key": "spec.forProvider.deployment[*].s3SecretKeySecretRef"}
+	return map[string]string{"deployment[*].gcs_access_key": "spec.forProvider.deployment[*].gcsAccessKeySecretRef", "deployment[*].gcs_secret_key": "spec.forProvider.deployment[*].gcsSecretKeySecretRef", "deployment[*].s3_access_key": "spec.forProvider.deployment[*].s3AccessKeySecretRef", "deployment[*].s3_secret_key": "spec.forProvider.deployment[*].s3SecretKeySecretRef"}
 }
 
 // GetObservation of this Source

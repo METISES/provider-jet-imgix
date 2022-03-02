@@ -100,9 +100,9 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 			(*out)[key] = outVal
 		}
 	}
-	if in.GcsAccessKey != nil {
-		in, out := &in.GcsAccessKey, &out.GcsAccessKey
-		*out = new(string)
+	if in.GcsAccessKeySecretRef != nil {
+		in, out := &in.GcsAccessKeySecretRef, &out.GcsAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.GcsBucket != nil {
@@ -151,9 +151,9 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 			}
 		}
 	}
-	if in.S3AccessKey != nil {
-		in, out := &in.S3AccessKey, &out.S3AccessKey
-		*out = new(string)
+	if in.S3AccessKeySecretRef != nil {
+		in, out := &in.S3AccessKeySecretRef, &out.S3AccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.S3Bucket != nil {

@@ -61,7 +61,7 @@ type DeploymentParameters struct {
 
 	// GCS Access Key ID.
 	// +kubebuilder:validation:Optional
-	GcsAccessKey *string `json:"gcsAccessKey,omitempty" tf:"gcs_access_key,omitempty"`
+	GcsAccessKeySecretRef *v1.SecretKeySelector `json:"gcsAccessKeySecretRef,omitempty" tf:"-"`
 
 	// GCS bucket name.
 	// +kubebuilder:validation:Optional
@@ -97,7 +97,7 @@ type DeploymentParameters struct {
 
 	// AWS Access Key ID.
 	// +kubebuilder:validation:Optional
-	S3AccessKey *string `json:"s3AccessKey,omitempty" tf:"s3_access_key,omitempty"`
+	S3AccessKeySecretRef *v1.SecretKeySelector `json:"s3AccessKeySecretRef,omitempty" tf:"-"`
 
 	// AWS S3 bucket name.
 	// +kubebuilder:validation:Optional
