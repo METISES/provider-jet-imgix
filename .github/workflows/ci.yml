@@ -19,7 +19,7 @@ env:
   # credentials have been provided before trying to run steps that need them.
   DOCKER_USR: ${{ secrets.DOCKER_USR }}
   AWS_USR: ${{ secrets.AWS_USR }}
-  VERSION: latest
+  VERSION: v0.1.1
 
 jobs:
   detect-noop:
@@ -313,8 +313,8 @@ jobs:
       - name: Push images
         shell: bash
         run: |
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64
-          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-amd64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-arm64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-amd64:${{ env.VERSION }}
+          docker push us-central1-docker.pkg.dev/metises-com/crossplane/provider-jet-imgix-controller-arm64:${{ env.VERSION }}
         
