@@ -307,6 +307,11 @@ func (in *SourceParameters) DeepCopyInto(out *SourceParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.WaitForDeployed != nil {
 		in, out := &in.WaitForDeployed, &out.WaitForDeployed
 		*out = new(bool)

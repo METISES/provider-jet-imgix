@@ -141,6 +141,10 @@ type SourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Source display name. Does not impact how images are served.
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// Determines if Terraform should wait for deployed status after any change.
 	// +kubebuilder:validation:Optional
 	WaitForDeployed *bool `json:"waitForDeployed,omitempty" tf:"wait_for_deployed,omitempty"`

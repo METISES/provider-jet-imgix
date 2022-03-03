@@ -220,12 +220,17 @@ spec:
                     description: Whether or not a Source is enabled and capable of
                       serving traffic.
                     type: boolean
+                  name:
+                    description: Source display name. Does not impact how images are
+                      served.
+                    type: string
                   waitForDeployed:
                     description: Determines if Terraform should wait for deployed
                       status after any change.
                     type: boolean
                 required:
                 - deployment
+                - name
                 type: object
               providerConfigRef:
                 default:
