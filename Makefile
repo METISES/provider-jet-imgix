@@ -11,8 +11,8 @@ export TERRAFORM_PROVIDER_VERSION := 1.0.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-imgix
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/timgchile/terraform-provider-imgix/releases/download/v1.0.0
 
-export BUILD_REGISTRY := us-central1-docker.pkg.dev/metises-com/crossplane
-export DOCKER_REGISTRY := us-central1-docker.pkg.dev/metises-com/crossplane
+export BUILD_REGISTRY := us-docker.pkg.dev/metises-com/crossplane
+export DOCKER_REGISTRY := us-docker.pkg.dev/metises-com/crossplane
 
 PLATFORMS ?= linux_amd64 linux_arm64
 

@@ -306,7 +306,7 @@ jobs:
       - name: Login to GCP Image Registry
         uses: docker/login-action@v1
         with:
-          registry: us-central1-docker.pkg.dev
+          registry: us-docker.pkg.dev
           username: _json_key
           password: ${{ secrets.METISES_GCP_SA }}
 
